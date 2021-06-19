@@ -5,9 +5,11 @@ import { Route, Switch, useHistory } from 'react-router-dom'
 
 //import components
 import NavBar from './NavBar'
-import Home from './Home'
 import Login from './Login'
 import CreateLogin from './CreateLogin'
+import Home from './Home'
+import SelectGameMode from './SelectGameMode'
+
 
 function App() {
   const [loginValidated, setLoginValidated] = useState(true)
@@ -20,8 +22,8 @@ function App() {
         <Switch>
           <Route exact path="/login">
             <Login 
-            loginValidated={loginValidated}
-            setLoginValidated={setLoginValidated}
+              loginValidated={loginValidated}
+              setLoginValidated={setLoginValidated}
             />
           </Route>
           <Route exact path="/createlogin">
@@ -30,7 +32,6 @@ function App() {
         </Switch>
       </div>
     )
-
   } else {
     return (
       <div className="App">
@@ -43,6 +44,9 @@ function App() {
           </Route>
           <Route exact path ="/createlogin">
             <CreateLogin />
+          </Route>
+          <Route exact path ="/selectgamemode">
+            <SelectGameMode />
           </Route>
           <Route exact path="/">
             <Home />
