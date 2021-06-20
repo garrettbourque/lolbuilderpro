@@ -39,9 +39,13 @@
       "username": "wyndell",
       "password": "12345",
       "id": 10
+    },
+    {
+      "username": "busterthecat",
+      "password": "12345",
+      "id": 11
     }
   ],
-
   "maps": [
     {
       "id": 1,
