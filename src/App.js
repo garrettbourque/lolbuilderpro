@@ -12,7 +12,14 @@ import SelectGameMode from './SelectGameMode'
 
 
 function App() {
-  const [loginValidated, setLoginValidated] = useState(true)
+  const [loginValidated, setLoginValidated] = useState(false)
+  const [selectedMap, setSelectedMap] = useState("")
+  const [selectedChampion, setSelectedChampion] = useState([])
+  const [selectedGameMode, setSelectedGameMode] = useState("")
+  const [currentUser, setCurrentUser] = useState({
+    username: "",
+    password: ""
+  })
   const history = useHistory()
 
   if (loginValidated===false) {
@@ -22,6 +29,8 @@ function App() {
         <Switch>
           <Route exact path="/login">
             <Login 
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
               loginValidated={loginValidated}
               setLoginValidated={setLoginValidated}
             />
@@ -38,6 +47,8 @@ function App() {
         <Switch>
           <Route exact path="/login">
             <Login 
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
               loginValidated={loginValidated}
               setLoginValidated={setLoginValidated}
             />
@@ -46,10 +57,24 @@ function App() {
             <CreateLogin />
           </Route>
           <Route exact path ="/selectgamemode">
-            <SelectGameMode />
+            <SelectGameMode 
+              selectedMap={selectedMap}
+              setSelectedMap={setSelectedMap}
+              selectedGameMode={selectedGameMode}
+              setSelectedGameMode={setSelectedGameMode}
+            />
           </Route>
           <Route exact path="/">
-            <Home />
+            <Home 
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+              selectedMap={selectedMap}
+              setSelectedMap={setSelectedMap}
+              selectedChampion={selectedChampion}
+              setSelectedChampion={setSelectedChampion}
+              selectedGameMode={selectedGameMode}
+              setSelectedGameMode={setSelectedGameMode}
+            />
           </Route>
         </Switch>
       </div>
