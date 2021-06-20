@@ -3,17 +3,14 @@
     {
       "id": 1,
       "username": "Sean",
-      "password": 123456
+      "password": "123456",
+      "champion": "Alistar"
     },
     {
       "id": 2,
       "username": "Garrett",
-      "password": 123456
-    },
-    {
-      "username": "Sean Balayan",
-      "password": "1234567",
-      "id": 5
+      "password": "123456",
+      "champion": "Urgot"
     },
     {
       "username": "Gimelle Jacala",
