@@ -2,15 +2,9 @@ import { React, useState, useEffect } from 'react'
 import Search from "./Search"
 import { useHistory } from 'react-router-dom'
 
-
-
-let Home = ({
-        currentUser, setCurrentUser, 
-        selectedMap, setSelectedMap, 
-        selectedChampion, setSelectedChampion, 
-        selectedGameMode, setSelectedGameMode }) => {
+let Home = ({currentUser, setCurrentUser, selectedMap, selectedChampion, setSelectedChampion, setOpponent, 
+        selectedGameMode}) => {
     const [leagueData, setLeagueData] = useState([])
-
     const [searchTerm, setSearchTerm] = useState("");
     const history = useHistory()
 
@@ -25,6 +19,7 @@ let Home = ({
                 .then(data => {
                     setLeagueData(data.data)
                     setSelectedChampion(Object.values(data.data)[Math.floor(Math.random() * Object.values(data.data).length)])
+                    setOpponent(Object.values(data.data)[Math.floor(Math.random() * Object.values(data.data).length)])
                 })
             } else {
                 fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
@@ -32,12 +27,10 @@ let Home = ({
                 .then(data => {
                     setLeagueData(data.data)
                     let foundChampion = Object.values(data.data).find(champion => {
-                        console.log(champion.name)
-                        console.log(userData.champion)
                         return champion.name === userData.champion
                     })
-                    console.log(foundChampion)
                     setSelectedChampion(foundChampion)
+                    setOpponent(Object.values(data.data)[Math.floor(Math.random() * Object.values(data.data).length)])
                 })
             }
         })
@@ -56,15 +49,13 @@ let Home = ({
         })
         .then(res => res.json())
         .then(data => setSelectedChampion(champion))
-
     }
 
     //Select a filtered list of champs when entering a search
     const champsToDisplay = Object.values(leagueData).filter((champ) =>
       champ.name.toLowerCase().includes(searchTerm.toLowerCase())
       ); 
-
-    
+   
     let handleSelectGameMode = () => {
         history.push('/selectgamemode')
     }
@@ -72,10 +63,10 @@ let Home = ({
 
     let handleBuild = () => {     
         history.push('/play/'+selectedChampion.name)
+    }
 
     let handlePlay = () => {
         history.push('/battle')
-
     }
 
     return (
@@ -94,17 +85,16 @@ let Home = ({
                     <div className="champion-description">{selectedChampion.blurb}</div>
                 </div>
                 <div className='play-container'>
-                    <div className="select-game">
+                    <div className="select-game-card">
                         <button className="select-game-button" onClick={() => handleSelectGameMode()}>
                             <em>Select Game Mode</em>
                         </button>
                     </div>
+                    <div className="build-card">
+                        <button className="build-button"onClick={() => handleBuild()}><b>Make a Build</b></button>
+                    </div>
                     <div className="play-card">
-
-                        <button className="build-button"onClick={() => handleBuild()}><em>Make a Build</em></button>
-
-                        <button className="play-button" onClick={() => handlePlay()}>Play</button>
-
+                        <button className="play-button" onClick={() => handlePlay()}><b>Play</b></button>
                     </div>
 
                 </div>
@@ -137,6 +127,5 @@ let Home = ({
         </div>
     )
 }
-
 
 export default Home
