@@ -65,25 +65,58 @@
 }
 
 /* styling for home component */
-.home-container {
+.main-container {
+  background-color: white;
+  border: 5px solid black;
+  border-radius: 16px;
+  opacity: 0.9;
+  height: 96vh;
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+}
+
+/* main home component divs */
+
+.game-setup-container{
+  display: flex;
+  height: 8vh;
+  border-radius: 16px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.action-container { 
   background-color: white;
   opacity: 0.9;
-  height: 90vh;
-  border: 5px solid black;
+  height: 80vh;
   border-radius: 16px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-
 }
 
+.user-information {
+  height: 5vh;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.logout-button {
+  border-radius: 16px;
+  font-size: 15px;
+  background-color: deepskyblue;
+}
+
+/* divs held within the action-container */
 .champion-viewer-container{  
   background-color: lightblue;
   opacity: 0.75;
   align-items: center;
-  height: 80%;
+  height: 90%;
   padding: 16px;
-  width: 300px;
+  width: 325px;
   border: 2px solid black;
   border-radius: 16px;
   display:flex;
@@ -106,46 +139,47 @@
 .play-container{
   background-color: lightblue;
   align-items: center;
-  height: 80%;
+  height: 90%;
   padding: 16px;
-  width: 300px;
+  width: 325px;
   border: 2px solid black;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   
 }
 
 .select-game{
   height: 60%;
-  width: 280px;
+  width: 300px;
   border: 1px solid black;
   border-radius: 16px;
 }
 
 .select-game-button {
   height: 100%;
-  width: 280px;
+  width: 300px;
   border: 1px solid black;
   border-radius: 16px;
-  font-size: 75px;
+  font-size: 70px;
   font-family: 'Courier New', Courier, monospace;
   background-image: url('https://miro.medium.com/max/3840/1*NPeIWlkuuUDMwq501QgZpw.jpeg');
-  background-size: contain;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
 }
 
 .play-card {
   border: 1px solid black;
   height: 35%;
-  width: 280px;
+  width: 300px;
   border-radius: 16px;
 }
 
 .play-button {
   height: 100%;
-  width: 280px;
+  width: 300px;
   border-radius: 16px;
   font-size: 75px;
   font-family: 'Courier New', Courier, monospace;
@@ -155,7 +189,7 @@
 .new-builds-container{
   background-color: lightblue;
   align-items: center;
-  height: 80%;
+  height: 90%;
   padding: 16px;
   width: 300px;
   border: 2px solid black;
@@ -171,10 +205,11 @@
   height: 30%;
   border-radius: 180px;
   padding: 20px;
+  font-size: 15px;
 }
 
 .champion-image {
-  width: 80%;
+  width: 95%;
   border-radius: 180px;
 }
 
@@ -182,10 +217,11 @@
 .summoners-rift {
   background-image: url('https://cdnen.samurai-gamers.com/wp-content/uploads/2017/08/10061038/Minimap.jpg');
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   background-color: lightblue;
   align-items: center;
-  height: 80%;
+  height: 88%;
   padding: 16px;
   width: 300px;
   border: 2px solid black;
@@ -193,10 +229,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-size: 45px;
 }
 
 .select-game-mode-container {
-  background-image: url();
   background-color: lightblue;
   align-items: center;
   height: 80%;
@@ -206,16 +242,17 @@
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .howling-abyss {
   background-image: url('https://cdna.artstation.com/p/assets/images/images/000/376/784/medium/peet-cooper-aram-fin-screen2.jpg?1419847218');
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   background-color: lightblue;
   align-items: center;
-  height: 80%;
+  height: 88%;
   padding: 16px;
   width: 300px;
   border: 2px solid black;
@@ -223,11 +260,13 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-size: 50px;
 }
 
 .select-game-mode-button {
   height: 100%;
   width: 280px;
+  margin: 5px;
   border-radius: 16px;
   font-size: 75px;
   font-family: 'Courier New', Courier, monospace;
