@@ -7,6 +7,8 @@
   border: 1px solid black;
 }
 
+
+/* styling for login/create login components */
 .create-login {
   opacity: 0.75;
   height: 100vh;
@@ -27,8 +29,6 @@
 }
 
 .login {
-  /* background-image: url('https://i.imgur.com/FUCFrKq.jpeg');
-  background-size: cover; */
   opacity: 0.75;
   height: 100vh;
   border: 1px solid black;
@@ -53,6 +53,8 @@
   justify-content: space-between;
 }
 
+
+/* styling for navbar component */
 .NavBar {
   display: flex;
   opacity: 0.9;
@@ -62,6 +64,7 @@
   background-color: lightblue;
 }
 
+/* styling for home component */
 .home-container {
   background-color: white;
   opacity: 0.9;
@@ -74,7 +77,7 @@
 
 }
 
-.champion-viewer-container{
+.champion-viewer-container{  
   background-color: lightblue;
   opacity: 0.75;
   align-items: center;
@@ -83,6 +86,21 @@
   width: 300px;
   border: 2px solid black;
   border-radius: 16px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.selected-champion-info{
+  background-color:white;
+  opacity: 0.75;
+  border-radius: 16px;
+}
+
+.champion-description{
+  border-radius: 16px;
+  opacity: 0.65;
+  background-color: white;
 }
 
 .play-container{
@@ -104,7 +122,6 @@
   width: 280px;
   border: 1px solid black;
   border-radius: 16px;
-
 }
 
 .select-game-button {
@@ -115,7 +132,8 @@
   font-size: 75px;
   font-family: 'Courier New', Courier, monospace;
   background-image: url('https://miro.medium.com/max/3840/1*NPeIWlkuuUDMwq501QgZpw.jpeg');
-  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .play-card {
@@ -147,14 +165,12 @@
   display: flex;
   flex-direction: column;
   align-content: space-between
-
 }
 
 .champion-container {
   height: 30%;
   border-radius: 180px;
   padding: 20px;
-
 }
 
 .champion-image {
@@ -162,6 +178,58 @@
   border-radius: 180px;
 }
 
-.logout-button{
+/* styling for Select Game Mode component */
+.summoners-rift {
+  background-image: url('https://cdnen.samurai-gamers.com/wp-content/uploads/2017/08/10061038/Minimap.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: lightblue;
+  align-items: center;
+  height: 80%;
+  padding: 16px;
+  width: 300px;
+  border: 2px solid black;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 
+.select-game-mode-container {
+  background-image: url();
+  background-color: lightblue;
+  align-items: center;
+  height: 80%;
+  padding: 16px;
+  width: 300px;
+  border: 2px solid black;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.howling-abyss {
+  background-image: url('https://cdna.artstation.com/p/assets/images/images/000/376/784/medium/peet-cooper-aram-fin-screen2.jpg?1419847218');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: lightblue;
+  align-items: center;
+  height: 80%;
+  padding: 16px;
+  width: 300px;
+  border: 2px solid black;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.select-game-mode-button {
+  height: 100%;
+  width: 280px;
+  border-radius: 16px;
+  font-size: 75px;
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgb(147, 240, 128);
 }
