@@ -1,9 +1,10 @@
 import { React, useState, useEffect } from 'react'
+import Search from "./Search"
 
 let Home = () => {
     const [leagueData, setLeagueData] = useState([])
     const [selectedChampion, setSelectedChampion] = useState([])
-
+    const [searchTerm, setSearchTerm] = useState("");
     useEffect(() => {
         fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
         .then(res => res.json())
@@ -24,6 +25,13 @@ let Home = () => {
         console.log('you clicked this champion')
         setSelectedChampion(champion)
     }
+
+    //Select a filtered list of champs when entering a search
+     const champsToDisplay = Object.values(leagueData).filter((champ) =>
+      champ.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ); 
+    
+
 
     // let renderChampion = (champion) => {
     //     return (
@@ -57,7 +65,9 @@ let Home = () => {
         </div>
         <div className='new-builds-container'>
             <b>Select your Champion</b>
-            {Object.values(leagueData).map(champion => {
+
+            <Search leagueData searchTerm={searchTerm} onChangeSearch={setSearchTerm}/>
+            {Object.values(champsToDisplay).map(champion => {
             return (
                 <div className="champion-container" key={champion.id} onClick={() => handleSelectChampion(champion)}>
                     <h3 className='champion-name'>{champion.name}</h3>
