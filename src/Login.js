@@ -20,7 +20,9 @@ let Login = ({ loginValidated, setLoginValidated }) => {
         password: ""
     })
     const history = useHistory()
-
+    const [usernameError, setUsernameError] = useState(false)
+    const [passwordError, setPasswordError] = useState(false)
+    
     let handleCreateLogin = () => {
         history.push('/createlogin')
     }
@@ -37,25 +39,38 @@ let Login = ({ loginValidated, setLoginValidated }) => {
         fetch('http://localhost:3000/users')
         .then(res => res.json())
         .then(data => {
-           let foundUser = data.find(user => {
-                if(user.username===currentUser.username){
-                    return user.username === currentUser.username
-                } else {
-                    alert('Please enter a valid username')
-                    history.push('/login')
-                    document.querySelector('#loginForm').reset()
-                    setLoginValidated(false)
-                }
-            })
-            if (foundUser.password == currentUser.password) {
-                alert('This is a valid username and password')
-                history.push('/')
-                setLoginValidated(true)
-            } else {
-                alert('Please enter a valid username or password')
-                history.push('/login')
-                document.querySelector('#loginForm').reset()
+            if (currentUser.username==="" || currentUser.username===undefined){
+                alert('Please input a username')
                 setLoginValidated(false)
+                setUsernameError(true)
+                document.querySelector('#loginForm').reset()
+            } else {
+                let foundUser = data.find(user => {
+                    if(user.username===currentUser.username){
+                        setUsernameError(false)
+                        return user.username === currentUser.username
+                    } else {
+                        history.push('/login')
+                        document.querySelector('#loginForm').reset()
+                        setLoginValidated(false)
+                        setUsernameError(true)
+                    }
+                })
+                console.log(currentUser.password)
+                console.log(foundUser.password)
+    
+                if (currentUser.password === undefined || currentUser.password === "") {
+                    alert('Please input a password')
+                    history.push('/login')
+                    setLoginValidated(false)
+                    setPasswordError(true)
+                } else if (currentUser.password==foundUser.password) {
+                    setLoginValidated(true)
+                    setUsernameError(false)
+                    setPasswordError(false)
+                    console.log('working')
+                    history.push('/')
+                }               
             }
         })
     }
@@ -65,25 +80,27 @@ let Login = ({ loginValidated, setLoginValidated }) => {
             <div className="login">
                     <div className="login-card">
                         <TextField
+                            error={usernameError===true ? true : false}
                             id="filled-error"
                             label="username"
                             name="username"
                             defaultValue={currentUser.username}
-                            //helperText="Incorrect entry. Please create a new login" 
+                            helperText={usernameError===true ? "Incorrect entry. Please create a new login." : null}
                             variant="filled"
                             onChange={handleChange}
                         />
                         <TextField
+                            error={passwordError===true ? true : false}
                             id="filled-error-helper-text"
                             label="password"
                             name="password"
                             defaultValue={currentUser.password}
-                            //helperText="Incorrect entry. Please try again." 
+                            helperText={passwordError===true ? "Incorrect entry. Please enter a valid password." : null}
                             variant="outlined"
                             onChange={handleChange}
                         />
                         <div className="login-buttons">
-                            <Button variant="contained" color="primary" type="submit">Submit</Button>
+                            <Button variant="contained" color="primary" type="submit" >Submit</Button>
                             <Button variant="contained" color="primary" onClick={() => handleCreateLogin()}>Create Login</Button>
                         </div>
                     </div>
