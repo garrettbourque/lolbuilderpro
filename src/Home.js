@@ -56,6 +56,7 @@ let Home = () => {
         </div>
         <div className='new-builds-container'>
             <b>Select your Champion</b>
+            <Search leagueData searchTerm={searchTerm} onChangeSearch={setSearchTerm}/>
             {Object.values(leagueData).map(champion => {
             return (
                 <div className="champion-container" key={champion.id} onClick={() => handleSelectChampion(champion)}>
