@@ -1,8 +1,13 @@
 import { React, useState, useEffect } from 'react'
+
+import Search from "./Search"
+
 import { useHistory } from 'react-router-dom'
+
 
 let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selectedChampion, setSelectedChampion, selectedGameMode, setSelectedGameMode }) => {
     const [leagueData, setLeagueData] = useState([])
+    const [searchTerm, setSearchTerm] = useState("");
     const history = useHistory()
 
     useEffect(() => {
@@ -19,6 +24,11 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
         setSelectedChampion(champion)
     }
 
+    //Select a filtered list of champs when entering a search
+     const champsToDisplay = Object.values(leagueData).filter((champ) =>
+      champ.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ); 
+    
     let handleSelectGameMode = () => {
         history.push('/selectgamemode')
     }
@@ -45,10 +55,12 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
                     <div className="play-card">
                         <button className="play-button">Play</button>
                     </div>
+
                 </div>
                 <div className='new-builds-container'>
                     <b>Select your Champion</b>
-                    {Object.values(leagueData).map(champion => {
+                    <Search leagueData searchTerm={searchTerm} onChangeSearch={setSearchTerm}/>
+                    {Object.values(champsToDisplay).map(champion => {
                     return (
                         <div className="champion-container" key={champion.id} onClick={() => handleSelectChampion(champion)}>
                             <h3 className='champion-name'>{champion.name}</h3>
@@ -71,5 +83,6 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
         </div>
     )
 }
+
 
 export default Home
