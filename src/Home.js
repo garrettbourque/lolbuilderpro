@@ -2,12 +2,14 @@ import { React, useState, useEffect } from 'react'
 
 let Home = () => {
     const [leagueData, setLeagueData] = useState([])
+    const [selectedChampion, setSelectedChampion] = useState([])
 
     useEffect(() => {
         fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
         .then(res => res.json())
         .then(data => {
             setLeagueData(data.data)
+            setSelectedChampion(Object.values(data.data)[Math.floor(Math.random() * Object.values(data.data).length)])
             // console.log(leagueData.data)
             // console.log(leagueDataArray)
             //console.log(leagueDataArray)
@@ -16,27 +18,34 @@ let Home = () => {
     },[])
 
     console.log(leagueData)
+    console.log(selectedChampion)
    
     let handleSelectChampion = (champion) => {
         console.log('you clicked this champion')
-        renderChampion(champion)
+        setSelectedChampion(champion)
     }
 
-    let renderChampion = (champion) => {
-        return (
-            <div>
-                <h3>{champion.name}</h3>
-                <h4>{champion.title}</h4>
-                <img className="champion-sprite" src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/${champion.image.sprite}`} alt="broken"></img>
-                <div className="champion-description">{champion.blurb}</div>
-            </div>
-        )
-    }
+    // let renderChampion = (champion) => {
+    //     return (
+    //         <div>
+    //             <h3>{champion.name}</h3>
+    //             <h4>{champion.title}</h4>
+    //             <img className="champion-sprite" src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/${champion.image.sprite}`} alt="broken"></img>
+    //             <div className="champion-description">{champion.blurb}</div>
+    //         </div>
+    //     )
+    // }
 
     return (<div className='home-container'>
-        <div className='champion-viewer-container'>
-            <b>Champion Information</b>
-            <div>{renderChampion}</div>
+        <div className='champion-viewer-container'
+            style={{backgroundImage: `url(
+            http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${selectedChampion.name}_0.jpg)`}}
+        >
+            <h3>{selectedChampion.name}</h3>
+            <h4>{selectedChampion.title}</h4>
+            {/* <img className="champion-sprite" src={`
+            http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${selectedChampion.name}_0.jpg`} alt="broken"></img> */}
+            <div className="champion-description">{selectedChampion.blurb}</div>
         </div>
         <div className='play-container'>
             <div className="select-game">
@@ -61,16 +70,3 @@ let Home = () => {
 }
 
 export default Home
-
-
-
-{/* {leagueDataArray.map(champion => {
-    return (
-        <ul>
-            <li>Name: {champion.name}</li>
-            <li>Title: {champion.title}</li>
-            <li>Description: {champion.blurb}</li>
-            <img src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/${champion.image.full}`} alt="broken"></img>
-        </ul>
-    )
-})} */}
