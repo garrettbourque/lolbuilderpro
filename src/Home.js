@@ -7,9 +7,7 @@ import Search from "./Search"
 let Home = () => {
     const [leagueData, setLeagueData] = useState([])
     const [selectedChampion, setSelectedChampion] = useState([])
-
     const [searchTerm, setSearchTerm] = useState("");
-
     const history = useHistory()
 
     useEffect(() => {
@@ -28,9 +26,10 @@ let Home = () => {
 
 
     //Select a filtered list of champs when entering a search
-     const champsToDisplay = Object.values(leagueData).filter((champ) =>
-      champ.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ); 
+    const champsToDisplay = Object.values(leagueData).filter((champ) =>
+    champ.name.toLowerCase().includes(searchTerm.toLowerCase())
+    ); 
+
     
 
     let handleSelectGameMode = () => {
@@ -56,8 +55,8 @@ let Home = () => {
         </div>
         <div className='new-builds-container'>
             <b>Select your Champion</b>
-            <Search leagueData searchTerm={searchTerm} onChangeSearch={setSearchTerm}/>
-            {Object.values(leagueData).map(champion => {
+            <Search  searchTerm={searchTerm} onChangeSearch={setSearchTerm}/>
+            {Object.values(champsToDisplay).map(champion => {
             return (
                 <div className="champion-container" key={champion.id} onClick={() => handleSelectChampion(champion)}>
                     <h3 className='champion-name'>{champion.name}</h3>

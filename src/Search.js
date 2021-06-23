@@ -4,6 +4,7 @@ function Search({searchTerm, onChangeSearch}) {
  
   function handleChange(event) {
     onChangeSearch(event.target.value);
+    console.log(event.target.value)
   }
 
  
