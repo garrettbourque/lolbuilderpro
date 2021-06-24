@@ -1,12 +1,12 @@
 import { React, useState, useEffect } from 'react'
-
+import { useHistory } from 'react-router-dom'
 import Search from "./Search"
 
-import { useHistory } from 'react-router-dom'
 
 
 let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selectedChampion, setSelectedChampion, selectedGameMode, setSelectedGameMode }) => {
     const [leagueData, setLeagueData] = useState([])
+
     const [searchTerm, setSearchTerm] = useState("");
     const history = useHistory()
 
@@ -25,9 +25,10 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
     }
 
     //Select a filtered list of champs when entering a search
-     const champsToDisplay = Object.values(leagueData).filter((champ) =>
-      champ.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ); 
+    const champsToDisplay = Object.values(leagueData).filter((champ) =>
+    champ.name.toLowerCase().includes(searchTerm.toLowerCase())
+    ); 
+
     
     let handleSelectGameMode = () => {
         history.push('/selectgamemode')
@@ -40,6 +41,7 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
                 <div><b>Champion:</b> {selectedChampion.name} {selectedChampion.title}</div>
                 <div><b>Game Mode:</b> {selectedGameMode}</div>
             </div>
+
             <div className='action-container'>
                 <div className='champion-viewer-container'
                     style={{backgroundImage: `url(
