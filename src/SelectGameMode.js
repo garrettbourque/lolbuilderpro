@@ -1,17 +1,32 @@
-let SelectGameMode = () => {
-    return (<div className="home-container">
-        <div className='summoners-rift'>
-            <h1>Summoner's Rift</h1>
-        </div>
-        <div className='select-game-mode-container'>
-             <button className="select-game-mode-button">1 v 1</button>
-             <button className="select-game-mode-button">2 v 2</button>
-        </div>
-        <div className='howling-abyss'>
-            <h1>Howling Abyss</h1>
-        </div>
+import { useHistory } from 'react-router-dom'
 
-    </div>)
+let SelectGameMode = ({ selectedMap, setSelectedMap, selectedGameMode, setSelectedGameMode }) => {
+    const history = useHistory()
+
+    let handleSelectMap = (e) => {
+        setSelectedMap(e.target.textContent)
+        history.push('/')
+    }
+
+    let handleSelectGameMode = (e) => {
+        setSelectedGameMode(e.target.id)
+        console.log(selectedGameMode)
+    }
+
+    return (
+        <div className="action-container">
+            <button id="summoners-rift" className='summoners-rift' onClick={(e) => handleSelectMap(e)}>
+                Summoner's Rift
+            </button>
+            <div className='select-game-mode-container'>
+                <button id="1v1" className="select-game-mode-button" onClick={(e) => handleSelectGameMode(e)}>1 v 1</button>
+                <button id="2v2" className="select-game-mode-button" onClick={(e) => handleSelectGameMode(e)}>2 v 2</button>
+            </div>
+            <button id="Howling Abyss" className='howling-abyss' onClick={(e) => handleSelectMap(e)}>
+                Howling Abyss
+            </button>
+
+        </div>)
 }
 
 export default SelectGameMode
