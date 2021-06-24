@@ -33,6 +33,10 @@ let CreateLogin = () => {
         e.preventDefault()
         if(newUser.username === "" || newUser.password === ""){
             alert('Please input a valid username or password')
+            setNewUser({
+                username: "",
+                password: ""
+            })
         } else {
             fetch('http://localhost:3000/users', {
             method: 'POST',
@@ -44,26 +48,8 @@ let CreateLogin = () => {
                 history.push('/login')
             })
         }
-        document.querySelector('#createLoginForm').reset()
+        
     }
-
-        // fetch('http://localhost:3000/users', {
-        //     method: 'POST',
-        //     headers: {'Content-type':'Application/json'}, 
-        //     body: JSON.stringify({newUser})
-        // })
-        // .then(res => res.json())
-        // .then(data => {
-        //     console.log(data)
-        //     if(checkUsers === true){
-        //         alert('That username already exists. Please input a new username')
-        //     } else if (newUser.password==="") {
-        //         alert('Please input a valid username and password')
-        //     } else {
-        //         history.push('/login')
-        //         document.querySelector('#createLoginForm').reset()
-        //     }
-    
 
     return (
         <form id="createLoginForm" className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>

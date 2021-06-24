@@ -40,5 +40,18 @@
       "password": "12345",
       "id": 10
     }
+  ],
+
+  "maps": [
+    {
+      "id": 1,
+      "name": "Summoner's Rift",
+      "image": "https://cdnen.samurai-gamers.com/wp-content/uploads/2017/08/10061038/Minimap.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Howling Abyss",
+      "image": "https://cdna.artstation.com/p/assets/images/images/000/376/784/medium/peet-cooper-aram-fin-screen2.jpg?1419847218"
+    }
   ]
 }
