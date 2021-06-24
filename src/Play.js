@@ -7,21 +7,21 @@ let Play = ({currentUser,setCurrentUser,selectedChampion,setSelectedChampion}) =
     const [championData, setChampionData] = useState([])
     const history = useHistory()
     const [searchTerm, setSearchTerm] = useState("");
-    
-    const [champStat, setChampStat] = useState([
-        {hp:''},
-        {hpperlevel:''},
-        {mp:''},
-        {mpperlevel:''},
-        {movespeed:''  },
-        {armor:''},{armorperlevel:''},{spellblock:''},
-        {spellblockperlevel:''},{attackrange:''},{hpregen:''},
-        {hpregenperlevel:''},{mpregen:''},{mpregenperlevel:''},
-        {crit:''},{critperlevel:''},{attackdamage:''},
-        {attackdamageperlevel:''},{attackspeedperlevel:''},{attackspeed:''}
+    const tempStat=[]
+    const [champStat, setChampStat] = useState({
+        hp:'',
+        hpperlevel:'',
+        mp:'',
+        mpperlevel:'',
+        movespeed:''  ,
+        armor:'',armorperlevel:'',spellblock:'',
+        spellblockperlevel:'',attackrange:'',hpregen:'',
+        hpregenperlevel:'',mpregen:'',mpregenperlevel:'',
+        crit:'',critperlevel:'',attackdamage:'',
+        attackdamageperlevel:'',attackspeedperlevel:'',attackspeed:''
         
-    ])
-     
+});
+     let statList=['hp','hpperlevel','mp','mpperlevel','movespeed','armor','armorperlevel','spellblock','spellblockperlevel','attackrange','hpregen','hpregenperlevel','mpregen','mpregenperlevel','crit','critperlevel','attackdamage','attackdamageperlevel','attackspeedperlevel','attackspeed']
     useEffect(() => {
         fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/item.json')
         .then(res => res.json())
@@ -39,13 +39,19 @@ let Play = ({currentUser,setCurrentUser,selectedChampion,setSelectedChampion}) =
      ); 
 
      const displayStats=()=>{
-         let number=0
+        let number=0
+        let currentStat =statList[number]
+        console.log(champStat.hp)
         Object.values(selectedChampion.stats).map(status=>{
+         
+            //console.log(currentStat)
+            //console.log(number)
             console.log(status)
             //console.log(Object.values(selectedChampion.stats[status]))
-            console.log(champStat[number])
+            // console.log(champStat.currentStat)
            // setChampStat({...champStat})
-           number++
+           tempStat.push(status)
+           
         })
        
        // console.log("stat "+champStat)
@@ -56,8 +62,9 @@ let Play = ({currentUser,setCurrentUser,selectedChampion,setSelectedChampion}) =
         return  <div>
                     <div>{selectedChampion.name} Stats</div>
                     {Object.keys(selectedChampion.stats).map(element => {
+                            number=number+1
                             //console.log(element)
-                          return  (<div>{element+" "}</div>)
+                          return  (<div>{element+" "+tempStat[number]}</div>)
                    
                         
                      })}
