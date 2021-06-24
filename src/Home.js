@@ -20,7 +20,6 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
     },[])
    
     let handleSelectChampion = (champion) => {
-        console.log('you clicked this champion')
         setSelectedChampion(champion)
     }
 
@@ -32,6 +31,10 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
     
     let handleSelectGameMode = () => {
         history.push('/selectgamemode')
+    }
+
+    let handlePlay = () => {     
+        history.push('/play/'+selectedChampion.name)
     }
 
     return (
@@ -55,7 +58,7 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
                         <button className="select-game-button" onClick={() => handleSelectGameMode()}><em>Select Game Mode</em></button>
                     </div>
                     <div className="play-card">
-                        <button className="play-button">Play</button>
+                        <button className="play-button"onClick={() => handlePlay()}><em>Play</em></button>
                     </div>
 
                 </div>

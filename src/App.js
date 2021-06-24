@@ -9,10 +9,10 @@ import Login from './Login'
 import CreateLogin from './CreateLogin'
 import Home from './Home'
 import SelectGameMode from './SelectGameMode'
-
+import Play from './Play'
 
 function App() {
-  const [loginValidated, setLoginValidated] = useState(false)
+  const [loginValidated, setLoginValidated] = useState(true)
   const [selectedMap, setSelectedMap] = useState("")
   const [selectedChampion, setSelectedChampion] = useState([])
   const [selectedGameMode, setSelectedGameMode] = useState("")
@@ -74,6 +74,15 @@ function App() {
               setSelectedChampion={setSelectedChampion}
               selectedGameMode={selectedGameMode}
               setSelectedGameMode={setSelectedGameMode}
+            />
+          </Route>
+          <Route exact path="/play/:id">
+            <Play 
+              currentUser={currentUser}
+              setCurrentUser={setCurrentUser}
+              selectedChampion={selectedChampion}
+              setSelectedChampion={setSelectedChampion}
+
             />
           </Route>
         </Switch>
