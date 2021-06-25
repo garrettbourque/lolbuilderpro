@@ -1,29 +1,34 @@
 import { useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-let Battle = ({ currentUser, setCurrentUser, selectedMap, selectedChampion, selectedGameMode }) => {
-    const history = useHistory();
-    const [opponentChampion, setOpponent] = useState("")
-    const [healthState, setHealthState] = useState(100)
-    const [magicState, setMagicState] = useState(40)
-    const [attackState, setAttackState] = useState(30)
-    const [defendState, setDefendState] = useState(10)
+let Battle = ({ itemData, currentUser, setCurrentUser, selectedMap, selectedChampion, opponentChampion, selectedGameMode, selectedItems }) => {
+    const history = useHistory();   
+    const [healthState, setHealthState] = useState(selectedChampion.stats.hp)
+    const [magicState, setMagicState] = useState(selectedChampion.stats.mp)
+    const [attackState, setAttackState] = useState(selectedChampion.stats.attackdamage)
+    const [defendState, setDefendState] = useState(selectedChampion.stats.armor)
     const [defenseModeOn, setDefenseModeOn] = useState(false)
-    const [healthStateOpp, setHealthStateOpp] = useState(75)
-    const [magicStateOpp, setMagicStateOpp] = useState(50)
-    const [attackStateOpp, setAttackStateOpp] = useState(30)
-    const [defendStateOpp, setDefendStateOpp] = useState(7)
+    const [healthStateOpp, setHealthStateOpp] = useState("")
+    const [magicStateOpp, setMagicStateOpp] = useState("")
+    const [attackStateOpp, setAttackStateOpp] = useState("")
+    const [defendStateOpp, setDefendStateOpp] = useState("")
     const [defenseModeOnOpp, setDefenseModeOnOpp] = useState(false)
+    const [oppWepArray, setOppWepArray] = useState([])
+    const [oppWep0, setOppWep0] = useState("")
+    const [oppWep1, setOppWep1] = useState("")
+    const [oppWep2, setOppWep2] = useState("")
+    const [oppWep3, setOppWep3] = useState("")
+    const [oppWep4, setOppWep4] = useState("")
+    const [oppWep5, setOppWep5] = useState("")
 
+    useEffect(()=> {
+        setHealthStateOpp(opponentChampion.stats.hp)
+        setMagicStateOpp(opponentChampion.stats.mp)
+        setAttackStateOpp(opponentChampion.stats.attackdamage)
+        setDefendStateOpp(opponentChampion.stats.armor)
+        setOppWepArray(Object.values(itemData).map(item => item))
 
-    useEffect(() => {
-        fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
-        .then(res => res.json())
-        .then(data => {
-            setOpponent(Object.values(data.data)[Math.floor(Math.random() * Object.values(data.data).length)])
-        })
-    },[])
-
+    },[opponentChampion])
 
     let handleAttack = (e) => {
         if((healthStateOpp-attackState)<0) {
@@ -64,7 +69,6 @@ let Battle = ({ currentUser, setCurrentUser, selectedMap, selectedChampion, sele
             setDefenseModeOn(true)
             randomMove()
         }
-
     }
 
     let handleUseItem = (e) => {
@@ -126,6 +130,17 @@ let Battle = ({ currentUser, setCurrentUser, selectedMap, selectedChampion, sele
         }
     }
 
+    let handleImportItems = () => {
+        setOppWepArray(Object.values(itemData).map(item => item))
+        setOppWep0(oppWepArray[Math.floor(Math.random()*oppWepArray.length)])
+        setOppWep1(oppWepArray[Math.floor(Math.random()*oppWepArray.length)])
+        setOppWep2(oppWepArray[Math.floor(Math.random()*oppWepArray.length)])
+        setOppWep3(oppWepArray[Math.floor(Math.random()*oppWepArray.length)])
+        setOppWep4(oppWepArray[Math.floor(Math.random()*oppWepArray.length)])
+        setOppWep5(oppWepArray[Math.floor(Math.random()*oppWepArray.length)])
+
+    }
+
     return (
         <div className="main-container" id={selectedChampion.name}>
             <div className="game-setup-container">
@@ -151,7 +166,14 @@ let Battle = ({ currentUser, setCurrentUser, selectedMap, selectedChampion, sele
                                 <h5>DEF: {defendState}</h5>
                             </div>
                         </div>
-                        <div className="items"></div>
+                        <div className="items">
+                            <img className='battle-item-image' src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${selectedItems[0].image.full}`} alt="Pick an Item"/>
+                            <img className='battle-item-image' src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${selectedItems[1].image.full}`} alt="Pick an Item"/>
+                            <img className='battle-item-image' src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${selectedItems[2].image.full}`} alt="Pick an Item"/>
+                            <img className='battle-item-image' src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${selectedItems[3].image.full}`} alt="Pick an Item"/>
+                            <img className='battle-item-image' src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${selectedItems[4].image.full}`} alt="Pick an Item"/>
+                            <img className='battle-item-image' src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${selectedItems[5].image.full}`} alt="Pick an Item"/>
+                        </div>
                     </div>
                     <div className="movelist">
                         <button className="move-button" onClick={(e) => handleAttack(e)}>Attack</button>
@@ -182,7 +204,17 @@ let Battle = ({ currentUser, setCurrentUser, selectedMap, selectedChampion, sele
                                 <h5>DEF: {defendStateOpp}</h5>
                             </div>
                         </div>
-                        <div className="items"></div>
+                        <div className="items">
+                            <img className='battle-item-image' src={oppWep0 !=="" ? `http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${oppWep0.image.full}` : null } alt="Pick an Item"/> 
+                            <img className='battle-item-image' src={oppWep1 !=="" ? `http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${oppWep1.image.full}` : null } alt="Pick an Item"/>
+                            <img className='battle-item-image' src={oppWep2 !=="" ? `http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${oppWep2.image.full}` : null } alt="Pick an Item"/>
+                            <img className='battle-item-image' src={oppWep3 !=="" ? `http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${oppWep3.image.full}` : null } alt="Pick an Item"/>
+                            <img className='battle-item-image' src={oppWep4 !=="" ? `http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${oppWep4.image.full}` : null } alt="Pick an Item"/>
+                            <img className='battle-item-image' src={oppWep5 !=="" ? `http://ddragon.leagueoflegends.com/cdn/11.12.1/img/item/${oppWep5.image.full}` : null } alt="Pick an Item"/>
+                        </div>
+                        <div>
+                            <button onClick={()=> handleImportItems()}>Import Items</button>
+                        </div>
                     </div>
                 </div>
             </div>
