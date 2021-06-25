@@ -137,6 +137,6 @@ let Home = ({
         </div>
     )
 }
-
+        }
 
 export default Home
