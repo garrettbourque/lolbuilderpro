@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from 'react'
 import {useParams, useHistory} from "react-router-dom"
 import Search from './Search'
+import Item from './Item'
 let Play = ({currentUser,setCurrentUser,selectedChampion,setSelectedChampion}) => {
     const [itemData, setItemData] = useState([])
     const [selectedItems, setSelectedItems] = useState([null,null,null,null,null,null])
