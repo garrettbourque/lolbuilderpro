@@ -58,7 +58,7 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
                         <button className="select-game-button" onClick={() => handleSelectGameMode()}><em>Select Game Mode</em></button>
                     </div>
                     <div className="play-card">
-                        <button className="play-button"onClick={() => handlePlay()}><em>Play</em></button>
+                        <button className="play-button"onClick={() => handlePlay()}><em>Make a Build</em></button>
                     </div>
 
                 </div>

@@ -12,7 +12,7 @@ import SelectGameMode from './SelectGameMode'
 import Play from './Play'
 
 function App() {
-  const [loginValidated, setLoginValidated] = useState(true)
+  const [loginValidated, setLoginValidated] = useState(false)
   const [selectedMap, setSelectedMap] = useState("")
   const [selectedChampion, setSelectedChampion] = useState([])
   const [selectedGameMode, setSelectedGameMode] = useState("")
