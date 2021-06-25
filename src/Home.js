@@ -3,12 +3,14 @@ import Search from "./Search"
 import { useHistory } from 'react-router-dom'
 
 
+
 let Home = ({
         currentUser, setCurrentUser, 
         selectedMap, setSelectedMap, 
         selectedChampion, setSelectedChampion, 
         selectedGameMode, setSelectedGameMode }) => {
     const [leagueData, setLeagueData] = useState([])
+
     const [searchTerm, setSearchTerm] = useState("");
     const history = useHistory()
 
@@ -59,6 +61,7 @@ let Home = ({
     const champsToDisplay = Object.values(leagueData).filter((champ) =>
       champ.name.toLowerCase().includes(searchTerm.toLowerCase())
       ); 
+
     
     let handleSelectGameMode = () => {
         history.push('/selectgamemode')
@@ -75,6 +78,7 @@ let Home = ({
                 <div><b>Champion:</b> {selectedChampion.name} {selectedChampion.title}</div>
                 <div><b>Game Mode:</b> {selectedGameMode}</div>
             </div>
+
             <div className='action-container'>
                 <div className='champion-viewer-container' style={{backgroundImage: `url(
                     http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${selectedChampion.name}_0.jpg)`}}
