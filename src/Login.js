@@ -1,4 +1,4 @@
-import { react, useState } from 'react'
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import { Button } from '@material-ui/core';
@@ -27,11 +27,25 @@ let Login = ({ currentUser, setCurrentUser, loginValidated, setLoginValidated })
         setCurrentUser({
             ...currentUser,
             [e.target.name] : e.target.value
+            
         })
     }
 
     let handleSubmit = (e) => {
         e.preventDefault()
+        fetch('http://localhost:3000/users')
+        .then(res => res.json())
+        .then(data => {
+            let findID = data.find(user => {
+                return user.username === currentUser.username
+            })
+            setCurrentUser({
+                ...currentUser,
+                id: findID.id
+            })
+        })
+
+
         fetch('http://localhost:3000/users')
         .then(res => res.json())
         .then(data => {

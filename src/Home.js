@@ -1,40 +1,81 @@
 import { React, useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
 import Search from "./Search"
+import { useHistory } from 'react-router-dom'
 
 
 
-let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selectedChampion, setSelectedChampion, selectedGameMode, setSelectedGameMode }) => {
+let Home = ({
+        currentUser, setCurrentUser, 
+        selectedMap, setSelectedMap, 
+        selectedChampion, setSelectedChampion, 
+        selectedGameMode, setSelectedGameMode }) => {
     const [leagueData, setLeagueData] = useState([])
 
     const [searchTerm, setSearchTerm] = useState("");
     const history = useHistory()
 
     useEffect(() => {
-        fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
-        .then(res => res.json())
-        .then(data => {
-            setLeagueData(data.data)
-            setSelectedChampion(Object.values(data.data)[Math.floor(Math.random() * Object.values(data.data).length)])
+        fetch(`http://localhost:3000/users/${currentUser.id}`)
+        .then(res=> res.json())
+        .then(userData => {
+            console.log(userData)
+            if(userData.champion===undefined || userData.champion===""){
+                fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
+                .then(res => res.json())
+                .then(data => {
+                    setLeagueData(data.data)
+                    setSelectedChampion(Object.values(data.data)[Math.floor(Math.random() * Object.values(data.data).length)])
+                })
+            } else {
+                fetch('http://ddragon.leagueoflegends.com/cdn/11.12.1/data/en_US/champion.json')
+                .then(res => res.json())
+                .then(data => {
+                    setLeagueData(data.data)
+                    let foundChampion = Object.values(data.data).find(champion => {
+                        console.log(champion.name)
+                        console.log(userData.champion)
+                        return champion.name === userData.champion
+                    })
+                    console.log(foundChampion)
+                    setSelectedChampion(foundChampion)
+                })
+            }
         })
-    },[])
+    },[setSelectedChampion])
    
     let handleSelectChampion = (champion) => {
-        setSelectedChampion(champion)
+
+        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+            method: 'PATCH', 
+            headers: {'Content-type':'application/json'}, 
+            body: JSON.stringify({
+                username: currentUser.username,
+                password: currentUser.password,
+                "champion": champion.name
+            })
+        })
+        .then(res => res.json())
+        .then(data => setSelectedChampion(champion))
+
     }
 
     //Select a filtered list of champs when entering a search
     const champsToDisplay = Object.values(leagueData).filter((champ) =>
-    champ.name.toLowerCase().includes(searchTerm.toLowerCase())
-    ); 
+      champ.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ); 
 
     
     let handleSelectGameMode = () => {
         history.push('/selectgamemode')
     }
 
-    let handlePlay = () => {     
+
+    let handleBuild = () => {     
         history.push('/play/'+selectedChampion.name)
+
+    let handlePlay = () => {
+        history.push('/battle')
+
     }
 
     return (
@@ -46,8 +87,7 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
             </div>
 
             <div className='action-container'>
-                <div className='champion-viewer-container'
-                    style={{backgroundImage: `url(
+                <div className='champion-viewer-container' style={{backgroundImage: `url(
                     http://ddragon.leagueoflegends.com/cdn/img/champion/loading/${selectedChampion.name}_0.jpg)`}}
                 >
                     <h3 className="selected-champion-info">{selectedChampion.name} {selectedChampion.title}</h3>
@@ -55,10 +95,16 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
                 </div>
                 <div className='play-container'>
                     <div className="select-game">
-                        <button className="select-game-button" onClick={() => handleSelectGameMode()}><em>Select Game Mode</em></button>
+                        <button className="select-game-button" onClick={() => handleSelectGameMode()}>
+                            <em>Select Game Mode</em>
+                        </button>
                     </div>
                     <div className="play-card">
-                        <button className="play-button"onClick={() => handlePlay()}><em>Make a Build</em></button>
+
+                        <button className="build-button"onClick={() => handleBuild()}><em>Make a Build</em></button>
+
+                        <button className="play-button" onClick={() => handlePlay()}>Play</button>
+
                     </div>
 
                 </div>
@@ -69,7 +115,10 @@ let Home = ({ currentUser, setCurrentUser, selectedMap, setSelectedMap, selected
                     return (
                         <div className="champion-container" key={champion.id} onClick={() => handleSelectChampion(champion)}>
                             <h3 className='champion-name'>{champion.name}</h3>
-                            <img className='champion-image' src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/${champion.image.full}`} alt="broken"/>
+                            <img 
+                                className='champion-image' 
+                                src={`http://ddragon.leagueoflegends.com/cdn/11.12.1/img/champion/${champion.image.full}`} 
+                                alt="broken"/>
                         </div>
                     )
                     })}

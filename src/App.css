@@ -99,6 +99,7 @@
 .user-information {
   height: 5vh;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 20px;
 }
@@ -270,6 +271,7 @@
   font-family: 'Courier New', Courier, monospace;
   background-color: rgb(147, 240, 128);
 }
+
 /* stylying for play container */
 
 .item-selector{
@@ -290,3 +292,100 @@
   border-radius:80px;
   align-content: left;
 }
+
+
+/* styling for battle component */
+.player-container {
+  background-color: lightblue;
+  align-items: center;
+  height: 90%;
+  padding: 16px;
+  width: 350px;
+  border: 2px solid black;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.versus-container {
+  background-color: lightgreen;
+  align-items: center;
+  height: 30%;
+  width: 100px;
+  padding: 16px;
+  border: 2px solid black;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 60px;
+}
+
+.versus {
+  border-radius: 180px;
+  border: 1px solid black;
+  background-color: mediumvioletred;
+}
+
+.champion-battle-image {
+  width: 350px;
+  height: 800%;
+  border: 1px solid black;
+  border-radius: 16px;
+  background-size:cover;
+  background-position: top;
+}
+
+.items-stats-container {
+  width: 325px;
+  height: 20%;
+  border-radius: 16px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.stats {
+  border-radius: 16px;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+}
+
+.health-stats {
+  background-color: lightyellow;
+  border-radius: 16px;
+  height: 50%;
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.fight-stats {
+  background-color: mediumpurple;
+  border-radius: 16px;
+  height: 50%;
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.items {
+  border: 1px solid black;
+  border-radius: 16px;
+  width: 50%;
+}
+
+.movelist {
+  width: 325px;
+  height: 20%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.move-button {
+  border-radius: 16px;
+  background-color: orange;
+}
+
