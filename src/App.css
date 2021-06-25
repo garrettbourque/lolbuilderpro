@@ -154,7 +154,6 @@
 .select-game{
   height: 60%;
   width: 300px;
-  border: 1px solid black;
   border-radius: 16px;
 }
 
@@ -242,7 +241,6 @@
   border: 2px solid black;
   border-radius: 16px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
 }
 
@@ -273,6 +271,28 @@
   font-family: 'Courier New', Courier, monospace;
   background-color: rgb(147, 240, 128);
 }
+
+/* stylying for play container */
+
+.item-selector{
+  border-radius: 16px;
+  height:12vh;
+  border:1px solid black
+}
+
+.stat-list{
+  text-align: left;
+  display: flex;
+}
+
+.item-image{
+  width: 25%;
+  height:90%;
+  margin:5px;
+  border-radius:80px;
+  align-content: left;
+}
+
 
 /* styling for battle component */
 .player-container {

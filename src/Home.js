@@ -44,6 +44,7 @@ let Home = ({
     },[setSelectedChampion])
    
     let handleSelectChampion = (champion) => {
+
         fetch(`http://localhost:3000/users/${currentUser.id}`, {
             method: 'PATCH', 
             headers: {'Content-type':'application/json'}, 
@@ -55,6 +56,7 @@ let Home = ({
         })
         .then(res => res.json())
         .then(data => setSelectedChampion(champion))
+
     }
 
     //Select a filtered list of champs when entering a search
@@ -67,8 +69,13 @@ let Home = ({
         history.push('/selectgamemode')
     }
 
+
+    let handleBuild = () => {     
+        history.push('/play/'+selectedChampion.name)
+
     let handlePlay = () => {
         history.push('/battle')
+
     }
 
     return (
@@ -93,7 +100,11 @@ let Home = ({
                         </button>
                     </div>
                     <div className="play-card">
+
+                        <button className="build-button"onClick={() => handleBuild()}><em>Make a Build</em></button>
+
                         <button className="play-button" onClick={() => handlePlay()}>Play</button>
+
                     </div>
 
                 </div>
